@@ -2,12 +2,13 @@ import medflexLogo from "@/assets/medflex-logo.png";
 
 interface ProtocolHeaderProps {
   kundenName: string;
+  fachbereich?: string;
   ansprechpartner: string;
-  implementationManager: string; // Projektverantwortlicher medflex
+  implementationManager: string;
   liveDatum: string;
 }
 
-const ProtocolHeader = ({ kundenName, ansprechpartner, implementationManager, liveDatum }: ProtocolHeaderProps) => {
+const ProtocolHeader = ({ kundenName, fachbereich, ansprechpartner, implementationManager, liveDatum }: ProtocolHeaderProps) => {
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -31,7 +32,8 @@ const ProtocolHeader = ({ kundenName, ansprechpartner, implementationManager, li
       {/* Meta Info */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {[
-          { label: "Kunde / Einrichtung / Fachbereich / Standort", value: kundenName },
+          { label: "Kunde / Einrichtung", value: kundenName },
+          ...(fachbereich ? [{ label: "Fachbereich / Standort", value: fachbereich }] : []),
           { label: "Projektleiter (Kunde)", value: ansprechpartner },
           { label: "Projektverantwortlicher (medflex)", value: implementationManager },
           { label: "Datum Produktivstart", value: liveDatum },

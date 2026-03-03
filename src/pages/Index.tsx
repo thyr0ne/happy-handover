@@ -57,6 +57,7 @@ const Index = () => {
 const IMSetupView = () => {
   const [imName, setImName] = useState("");
   const [kundenName, setKundenName] = useState("");
+  const [fachbereich, setFachbereich] = useState("");
   const [ansprechpartner, setAnsprechpartner] = useState("");
   const [liveDatum, setLiveDatum] = useState("");
   const [generatedLink, setGeneratedLink] = useState("");
@@ -74,6 +75,7 @@ const IMSetupView = () => {
     const data = {
       im: imName.trim(),
       kunde: kundenName.trim(),
+      fb: fachbereich.trim(),
       ap: ansprechpartner.trim(),
       datum: liveDatum,
       erstellt: new Date().toISOString().split("T")[0],
@@ -112,9 +114,15 @@ const IMSetupView = () => {
             <Separator />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-sm font-medium text-foreground">Kunde / Einrichtung / Fachbereich / Standort *</label>
-                <Input value={kundenName} onChange={(e) => setKundenName(e.target.value)} placeholder="Name der Einrichtung, Fachbereich, Standort" />
+                <label className="text-sm font-medium text-foreground">Kunde / Einrichtung *</label>
+                <Input value={kundenName} onChange={(e) => setKundenName(e.target.value)} placeholder="Name der Einrichtung" />
               </div>
+              <div className="space-y-1.5">
+                <label className="text-sm font-medium text-foreground">Fachbereich / Standort</label>
+                <Input value={fachbereich} onChange={(e) => setFachbereich(e.target.value)} placeholder="z. B. Orthopädie, Standort Nord" />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-foreground">Projektleiter (Kunde)</label>
                 <Input value={ansprechpartner} onChange={(e) => setAnsprechpartner(e.target.value)} placeholder="Name des Ansprechpartners" />
@@ -167,6 +175,7 @@ interface CustomerViewProps {
 const CustomerView = ({ data }: CustomerViewProps) => {
   const implementationManager = data.im || "";
   const kundenName = data.kunde || "";
+  const fachbereich = data.fb || "";
   const ansprechpartnerDefault = data.ap || "";
   const liveDatumDefault = data.datum || "";
 
@@ -206,6 +215,7 @@ const CustomerView = ({ data }: CustomerViewProps) => {
         <div id="protocol-content" className="space-y-8">
           <ProtocolHeader
             kundenName={kundenName}
+            fachbereich={fachbereich}
             ansprechpartner={ansprechpartner}
             implementationManager={implementationManager}
             liveDatum={liveDatum}
