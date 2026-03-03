@@ -3,16 +3,16 @@ import { Clock, CheckCircle2, Settings, AlertTriangle } from "lucide-react";
 const steps = [
   {
     icon: Settings,
-    label: "Testing-Phase",
+    label: "Testphase",
     duration: "5 Werktage",
     description: "Technische Anpassungen",
     colorClass: "text-info bg-secondary",
   },
   {
     icon: Clock,
-    label: "Auto-Abnahme",
+    label: "Automatische Abnahme",
     duration: "14 Tage",
-    description: "Frist nach Go-Live",
+    description: "Frist nach Produktivstart",
     colorClass: "text-accent bg-secondary",
   },
   {
@@ -24,7 +24,7 @@ const steps = [
   },
   {
     icon: AlertTriangle,
-    label: "Change-Requests",
+    label: "Änderungswünsche",
     duration: "15 Werktage",
     description: "Planungsfrist",
     colorClass: "text-warning bg-secondary",
