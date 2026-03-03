@@ -1,4 +1,4 @@
-import { Shield } from "lucide-react";
+import medflexLogo from "@/assets/medflex-logo.png";
 
 interface ProtocolHeaderProps {
   kundenName: string;
@@ -12,9 +12,9 @@ const ProtocolHeader = ({ kundenName, ansprechpartner, implementationManager, li
     <div className="space-y-6">
       {/* Header */}
       <div className="medflex-gradient rounded-2xl p-8 text-primary-foreground medflex-shadow-lg">
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex items-center gap-4 mb-4">
           <div className="rounded-xl bg-primary-foreground/20 p-2.5">
-            <Shield className="h-6 w-6" />
+            <img src={medflexLogo} alt="medflex Logo" className="h-7 brightness-0 invert" />
           </div>
           <div>
             <h1 className="text-2xl font-bold">Abnahmeprotokoll</h1>
