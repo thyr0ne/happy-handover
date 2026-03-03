@@ -1,11 +1,248 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Separator } from "@/components/ui/separator";
+import { toast } from "sonner";
+import { Download, FileCheck, Info, AlertCircle } from "lucide-react";
+import ProtocolHeader from "@/components/ProtocolHeader";
+import ProcessTimeline from "@/components/ProcessTimeline";
+import PriorityMatrix from "@/components/PriorityMatrix";
+import SignaturePad from "@/components/SignaturePad";
+import { generatePdf } from "@/lib/generatePdf";
+
+const checklistItems = [
+  "Telefonassistent ist unter der definierten Nummer erreichbar.",
+  "Notfall-Erkennung und Weiterleitung funktionieren wie definiert.",
+  "Die Vorqualifizierung der Anliegen (Triage) entspricht den Vorgaben.",
+  "Admin-Schulung (Train the Trainer) wurde erfolgreich durchgeführt.",
+];
 
 const Index = () => {
+  const [searchParams] = useSearchParams();
+
+  const implementationManager = searchParams.get("im") || "";
+  const abnahmeStart = searchParams.get("datum") || "";
+
+  const [kundenName, setKundenName] = useState("");
+  const [ansprechpartner, setAnsprechpartner] = useState("");
+  const [liveDatum, setLiveDatum] = useState(abnahmeStart);
+  const [ort, setOrt] = useState("");
+  const [datum, setDatum] = useState(new Date().toISOString().split("T")[0]);
+  const [checkedItems, setCheckedItems] = useState<boolean[]>(new Array(checklistItems.length).fill(false));
+  const [signature, setSignature] = useState<string | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const handleCheckChange = (index: number, checked: boolean) => {
+    const updated = [...checkedItems];
+    updated[index] = checked;
+    setCheckedItems(updated);
+  };
+
+  const handleSignatureChange = useCallback((dataUrl: string | null) => {
+    setSignature(dataUrl);
+  }, []);
+
+  const handleDownloadPdf = async () => {
+    if (!kundenName.trim()) {
+      toast.error("Bitte geben Sie den Kundennamen ein.");
+      return;
+    }
+    setIsGenerating(true);
+    try {
+      await generatePdf("protocol-content", `Abnahmeprotokoll_${kundenName.replace(/\s+/g, "_")}.pdf`);
+      toast.success("PDF wurde erfolgreich erstellt!");
+    } catch {
+      toast.error("Fehler bei der PDF-Erstellung.");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-background">
+      <div className="mx-auto max-w-3xl px-4 py-8 md:py-12">
+        <div id="protocol-content" className="space-y-8">
+          {/* Header */}
+          <ProtocolHeader
+            kundenName={kundenName}
+            ansprechpartner={ansprechpartner}
+            implementationManager={implementationManager}
+            liveDatum={liveDatum}
+          />
+
+          {/* Editable fields */}
+          <div className="rounded-xl border border-border bg-card p-6 space-y-4 no-print">
+            <h3 className="font-semibold text-foreground flex items-center gap-2">
+              <Info className="h-4 w-4 text-primary" /> Bitte ausfüllen
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <label className="text-sm font-medium text-muted-foreground">Kunde / Einrichtung</label>
+                <Input value={kundenName} onChange={(e) => setKundenName(e.target.value)} placeholder="Name der Einrichtung" />
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-sm font-medium text-muted-foreground">Projektleiter (Kunde)</label>
+                <Input value={ansprechpartner} onChange={(e) => setAnsprechpartner(e.target.value)} placeholder="Ihr Name" />
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-sm font-medium text-muted-foreground">Datum Live-Schaltung</label>
+                <Input type="date" value={liveDatum} onChange={(e) => setLiveDatum(e.target.value)} />
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-sm font-medium text-muted-foreground">Ort</label>
+                <Input value={ort} onChange={(e) => setOrt(e.target.value)} placeholder="Ort" />
+              </div>
+            </div>
+          </div>
+
+          {/* Section 1 */}
+          <section className="space-y-3">
+            <h2 className="text-lg font-bold text-foreground">1. Gegenstand der Abnahme</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Gegenstand ist die technische Einrichtung und Konfiguration des medflex KI-Telefonassistenten 
+              (Phase 1) basierend auf dem abgestimmten Questionnaire und den definierten Best-Practice-Standards.
+            </p>
+          </section>
+
+          <Separator />
+
+          {/* Section 2 - Timeline */}
+          <section className="space-y-4">
+            <h2 className="text-lg font-bold text-foreground">2. Fristen und automatische Abnahme</h2>
+            <ProcessTimeline />
+            <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+              <div className="flex gap-2 items-start rounded-lg bg-accent/10 border border-accent/20 p-4">
+                <AlertCircle className="h-4 w-4 text-accent mt-0.5 shrink-0" />
+                <p>
+                  <strong className="text-foreground">Automatische Abnahme:</strong> Die förmliche Abnahme gilt als erteilt, 
+                  wenn innerhalb von <strong>14 Tagen</strong> nach der produktiven Live-Schaltung keine schriftliche Meldung 
+                  über wesentliche Mängel erfolgt.
+                </p>
+              </div>
+              <p>
+                <strong className="text-foreground">Testing-Phase:</strong> Während der aktiven Testing-Phase werden notwendige 
+                technische Anpassungen innerhalb von maximal <strong>5 Werktagen</strong> durch medflex umgesetzt.
+              </p>
+            </div>
+          </section>
+
+          <Separator />
+
+          {/* Section 3 - Change Management */}
+          <section className="space-y-4">
+            <h2 className="text-lg font-bold text-foreground">3. Change-Management nach der Abnahme</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Nach erfolgter (oder automatischer) Abnahme geht das Projekt in den Regelbetrieb über. 
+              Änderungswünsche müssen in die CS-Ressourcenplanung aufgenommen werden und können bis zu 
+              <strong> 15 Werktage</strong> in Anspruch nehmen.
+            </p>
+            <PriorityMatrix />
+          </section>
+
+          <Separator />
+
+          {/* Section 4 - Checklist */}
+          <section className="space-y-4">
+            <h2 className="text-lg font-bold text-foreground">4. Abnahmekriterien</h2>
+            <div className="rounded-xl border border-border bg-card p-5 space-y-4">
+              {checklistItems.map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <Checkbox
+                    id={`check-${i}`}
+                    checked={checkedItems[i]}
+                    onCheckedChange={(checked) => handleCheckChange(i, checked === true)}
+                    className="mt-0.5"
+                  />
+                  <label htmlFor={`check-${i}`} className="text-sm text-foreground cursor-pointer leading-relaxed">
+                    {item}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <Separator />
+
+          {/* Section 5 - Signatures */}
+          <section className="space-y-5">
+            <h2 className="text-lg font-bold text-foreground">5. Unterschriften</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Durch die Unterschrift (oder den Ablauf der 2-Wochen-Frist) bestätigt der Kunde die 
+              Funktionsfähigkeit der Lösung gemäß dem Statement of Work (SoW).
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Customer signature */}
+              <div className="space-y-3">
+                <h4 className="text-sm font-semibold text-foreground">Kunde</h4>
+                <SignaturePad onSignatureChange={handleSignatureChange} signerName={ansprechpartner} />
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <label className="text-xs text-muted-foreground">Ort</label>
+                    <Input value={ort} onChange={(e) => setOrt(e.target.value)} placeholder="Ort" className="text-sm h-9" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs text-muted-foreground">Datum</label>
+                    <Input type="date" value={datum} onChange={(e) => setDatum(e.target.value)} className="text-sm h-9" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Medflex signature */}
+              <div className="space-y-3">
+                <h4 className="text-sm font-semibold text-foreground">medflex</h4>
+                <div className="rounded-lg border-2 border-dashed border-border bg-muted/30 p-6 flex flex-col items-center justify-center min-h-[120px]">
+                  <span className="font-signature text-3xl text-foreground">{implementationManager || "—"}</span>
+                  <span className="text-xs text-muted-foreground mt-2">Implementation Manager</span>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <label className="text-xs text-muted-foreground">Ort</label>
+                    <p className="text-sm font-medium text-foreground h-9 flex items-center">München</p>
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs text-muted-foreground">Datum</label>
+                    <p className="text-sm font-medium text-foreground h-9 flex items-center">{abnahmeStart || datum}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        {/* Actions */}
+        <div className="mt-8 flex flex-col sm:flex-row gap-3 no-print">
+          <Button
+            onClick={handleDownloadPdf}
+            disabled={isGenerating}
+            className="medflex-gradient text-primary-foreground medflex-shadow gap-2 flex-1"
+            size="lg"
+          >
+            <Download className="h-4 w-4" />
+            {isGenerating ? "Wird erstellt..." : "Als PDF herunterladen"}
+          </Button>
+          <Button
+            variant="outline"
+            size="lg"
+            className="gap-2 flex-1"
+            onClick={() => {
+              toast.info(
+                "Die automatische Abnahme greift nach Ablauf der 14-Tage-Frist ohne schriftliche Mängelmeldung.",
+                { duration: 6000 }
+              );
+            }}
+          >
+            <FileCheck className="h-4 w-4" />
+            Automatische Abnahme Info
+          </Button>
+        </div>
+
+        {/* Footer */}
+        <p className="text-center text-xs text-muted-foreground mt-8 mb-4">
+          © {new Date().getFullYear()} medflex · Abnahmeprotokoll für Automatisierungslösungen
+        </p>
       </div>
     </div>
   );
