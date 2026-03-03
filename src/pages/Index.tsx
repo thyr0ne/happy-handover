@@ -336,7 +336,7 @@ const CustomerView = ({ data }: CustomerViewProps) => {
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1">
                     <label className="text-xs text-muted-foreground">Ort</label>
-                    <p className="text-sm font-medium text-foreground h-9 flex items-center">München</p>
+                    <p className="text-sm font-medium text-foreground h-9 flex items-center"><p className="text-sm font-medium text-foreground h-9 flex items-center">Konstanz</p></p>
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs text-muted-foreground">Datum</label>
