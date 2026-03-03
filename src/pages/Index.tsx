@@ -269,7 +269,7 @@ const CustomerView = ({ data }: CustomerViewProps) => {
               </div>
               <p>
                  <strong className="text-foreground">Testphase:</strong> Während der aktiven Testphase werden notwendige 
-                 technische Anpassungen innerhalb von maximal <strong>5 Werktagen</strong> durch medflex umgesetzt.
+                 technische Anpassungen durch medflex vorgenommen. Diese sollten innerhalb von <strong>5 Werktagen</strong> umgesetzt sein, je nach Projektaufkommen.
               </p>
             </div>
           </section>
