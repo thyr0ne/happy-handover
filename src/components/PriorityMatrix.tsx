@@ -11,10 +11,10 @@ const PriorityMatrix = () => {
           <h4 className="font-semibold text-foreground">Workflow-Fehler</h4>
         </div>
         <p className="text-sm text-muted-foreground">
-          Systemabbrüche, fehlerhafte Triage-Logik oder technische Fehler werden <strong className="text-destructive">priorisiert</strong> behandelt.
+          Systemabbrüche, fehlerhafte Weiterleitungslogik oder technische Fehler werden <strong className="text-destructive">priorisiert</strong> behandelt.
         </p>
         <span className="inline-block rounded-full bg-destructive/10 px-3 py-1 text-xs font-medium text-destructive">
-          Sofortige Bearbeitung
+          Schnellstmögliche Bearbeitung
         </span>
       </div>
 

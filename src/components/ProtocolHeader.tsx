@@ -31,7 +31,7 @@ const ProtocolHeader = ({ kundenName, ansprechpartner, implementationManager, li
       {/* Meta Info */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {[
-          { label: "Kunde / Einrichtung", value: kundenName },
+          { label: "Kunde / Einrichtung / Fachbereich / Standort", value: kundenName },
           { label: "Projektleiter (Kunde)", value: ansprechpartner },
           { label: "Projektverantwortlicher (medflex)", value: implementationManager },
           { label: "Datum Produktivstart", value: liveDatum },

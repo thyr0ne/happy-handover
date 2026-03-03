@@ -4,8 +4,8 @@ const steps = [
   {
     icon: Settings,
     label: "Testphase",
-    duration: "5 Werktage",
-    description: "Technische Anpassungen",
+    duration: "ca. 5 Werktage",
+    description: "Je nach Projektaufkommen",
     colorClass: "text-info bg-secondary",
   },
   {

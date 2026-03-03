@@ -16,7 +16,7 @@ import medflexLogo from "@/assets/medflex-logo.png";
 const checklistItems = [
   "Telefonassistent ist unter der definierten Nummer erreichbar.",
   "Notfall-Erkennung und Weiterleitung funktionieren wie definiert.",
-  "Die Vorqualifizierung der Anliegen (Triage) entspricht den Vorgaben.",
+  "Die Vorqualifizierung der Anliegen entspricht den Vorgaben.",
   "Einführungsschulung (Multiplikatoren-Prinzip) wurde erfolgreich durchgeführt.",
 ];
 
@@ -112,8 +112,8 @@ const IMSetupView = () => {
             <Separator />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-sm font-medium text-foreground">Kunde / Einrichtung *</label>
-                <Input value={kundenName} onChange={(e) => setKundenName(e.target.value)} placeholder="Name der Einrichtung" />
+                <label className="text-sm font-medium text-foreground">Kunde / Einrichtung / Fachbereich / Standort *</label>
+                <Input value={kundenName} onChange={(e) => setKundenName(e.target.value)} placeholder="Name der Einrichtung, Fachbereich, Standort" />
               </div>
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-foreground">Projektleiter (Kunde)</label>
