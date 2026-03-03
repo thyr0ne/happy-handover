@@ -197,10 +197,25 @@ const CustomerView = ({ data }: CustomerViewProps) => {
     setSignature(dataUrl);
   }, []);
 
-  const handleDownloadPdf = async () => {
+  const handleDownloadPdf = () => {
     setIsGenerating(true);
     try {
-      await generatePdf("protocol-content", `Abnahmeprotokoll_${kundenName.replace(/\s+/g, "_")}.pdf`);
+      generatePdf(
+        {
+          kundenName,
+          fachbereich,
+          ansprechpartner,
+          implementationManager,
+          liveDatum,
+          erstelltDatum: data.erstellt || datum,
+          checkedItems,
+          checklistItems,
+          signatureDataUrl: signature,
+          ort,
+          datum,
+        },
+        `Abnahmeprotokoll_${kundenName.replace(/\s+/g, "_")}.pdf`
+      );
       toast.success("PDF wurde erfolgreich erstellt!");
     } catch {
       toast.error("Fehler bei der PDF-Erstellung.");
