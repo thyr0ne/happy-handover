@@ -3,7 +3,7 @@ import medflexLogo from "@/assets/medflex-logo.png";
 interface ProtocolHeaderProps {
   kundenName: string;
   ansprechpartner: string;
-  implementationManager: string;
+  implementationManager: string; // Projektverantwortlicher medflex
   liveDatum: string;
 }
 
@@ -33,8 +33,8 @@ const ProtocolHeader = ({ kundenName, ansprechpartner, implementationManager, li
         {[
           { label: "Kunde / Einrichtung", value: kundenName },
           { label: "Projektleiter (Kunde)", value: ansprechpartner },
-          { label: "Implementation Manager", value: implementationManager },
-          { label: "Datum Live-Schaltung", value: liveDatum },
+          { label: "Projektverantwortlicher (medflex)", value: implementationManager },
+          { label: "Datum Produktivstart", value: liveDatum },
         ].map((item, i) => (
           <div key={i} className="rounded-xl border border-border bg-card p-4">
             <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{item.label}</span>

@@ -17,7 +17,7 @@ const checklistItems = [
   "Telefonassistent ist unter der definierten Nummer erreichbar.",
   "Notfall-Erkennung und Weiterleitung funktionieren wie definiert.",
   "Die Vorqualifizierung der Anliegen (Triage) entspricht den Vorgaben.",
-  "Admin-Schulung (Train the Trainer) wurde erfolgreich durchgeführt.",
+  "Einführungsschulung (Multiplikatoren-Prinzip) wurde erfolgreich durchgeführt.",
 ];
 
 // Encode/decode helpers using base64
@@ -106,7 +106,7 @@ const IMSetupView = () => {
         <div className="rounded-2xl border border-border bg-card p-6 md:p-8 space-y-6">
           <div className="space-y-4">
             <div className="space-y-1.5">
-              <label className="text-sm font-medium text-foreground">Ihr Name (Implementation Manager) *</label>
+              <label className="text-sm font-medium text-foreground">Ihr Name (Projektverantwortlicher medflex) *</label>
               <Input value={imName} onChange={(e) => setImName(e.target.value)} placeholder="z. B. Max Mustermann" />
             </div>
             <Separator />
@@ -121,7 +121,7 @@ const IMSetupView = () => {
               </div>
             </div>
             <div className="space-y-1.5">
-              <label className="text-sm font-medium text-foreground">Datum Live-Schaltung</label>
+              <label className="text-sm font-medium text-foreground">Datum Produktivstart</label>
               <Input type="date" value={liveDatum} onChange={(e) => setLiveDatum(e.target.value)} />
             </div>
           </div>
@@ -222,7 +222,7 @@ const CustomerView = ({ data }: CustomerViewProps) => {
                 <Input value={ansprechpartner} onChange={(e) => setAnsprechpartner(e.target.value)} placeholder="Ihr Name" />
               </div>
               <div className="space-y-1.5">
-                <label className="text-sm font-medium text-muted-foreground">Datum Live-Schaltung</label>
+                <label className="text-sm font-medium text-muted-foreground">Datum Produktivstart</label>
                 <Input type="date" value={liveDatum} onChange={(e) => setLiveDatum(e.target.value)} />
               </div>
               <div className="space-y-1.5">
@@ -237,7 +237,7 @@ const CustomerView = ({ data }: CustomerViewProps) => {
             <h2 className="text-lg font-bold text-foreground">1. Gegenstand der Abnahme</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Gegenstand ist die technische Einrichtung und Konfiguration des medflex KI-Telefonassistenten 
-              (Phase 1) basierend auf dem abgestimmten Questionnaire und den definierten Best-Practice-Standards.
+              (Phase 1) auf Grundlage des abgestimmten Fragebogens und der definierten Qualitätsstandards.
             </p>
           </section>
 
@@ -250,15 +250,16 @@ const CustomerView = ({ data }: CustomerViewProps) => {
             <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
               <div className="flex gap-2 items-start rounded-lg bg-accent/10 border border-accent/20 p-4">
                 <AlertCircle className="h-4 w-4 text-accent mt-0.5 shrink-0" />
-                <p>
-                  <strong className="text-foreground">Automatische Abnahme:</strong> Die förmliche Abnahme gilt als erteilt, 
-                  wenn innerhalb von <strong>14 Tagen</strong> nach der produktiven Live-Schaltung keine schriftliche Meldung 
-                  über wesentliche Mängel erfolgt.
+                 <p>
+                   <strong className="text-foreground">Automatische Abnahme:</strong> Die förmliche Abnahme gilt als erteilt, 
+                   wenn innerhalb von <strong>14 Tagen</strong> nach dem produktiven Start keine schriftliche Meldung 
+                   über wesentliche Mängel erfolgt.
+                 
                 </p>
               </div>
               <p>
-                <strong className="text-foreground">Testing-Phase:</strong> Während der aktiven Testing-Phase werden notwendige 
-                technische Anpassungen innerhalb von maximal <strong>5 Werktagen</strong> durch medflex umgesetzt.
+                 <strong className="text-foreground">Testphase:</strong> Während der aktiven Testphase werden notwendige 
+                 technische Anpassungen innerhalb von maximal <strong>5 Werktagen</strong> durch medflex umgesetzt.
               </p>
             </div>
           </section>
@@ -267,10 +268,10 @@ const CustomerView = ({ data }: CustomerViewProps) => {
 
           {/* Section 3 - Change Management */}
           <section className="space-y-4">
-            <h2 className="text-lg font-bold text-foreground">3. Change-Management nach der Abnahme</h2>
+            <h2 className="text-lg font-bold text-foreground">3. Änderungsverfahren nach der Abnahme</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Nach erfolgter (oder automatischer) Abnahme geht das Projekt in den Regelbetrieb über. 
-              Änderungswünsche müssen in die CS-Ressourcenplanung aufgenommen werden und können bis zu 
+              Änderungswünsche müssen in die Kapazitätsplanung des Kundenservice aufgenommen werden und können bis zu 
               <strong> 15 Werktage</strong> in Anspruch nehmen.
             </p>
             <PriorityMatrix />
@@ -305,14 +306,14 @@ const CustomerView = ({ data }: CustomerViewProps) => {
             <h2 className="text-lg font-bold text-foreground">5. Unterschriften</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Durch die Unterschrift (oder den Ablauf der 2-Wochen-Frist) bestätigt der Kunde die 
-              Funktionsfähigkeit der Lösung gemäß dem Statement of Work (SoW).
+              Funktionsfähigkeit der Lösung gemäß der Leistungsbeschreibung.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Customer signature */}
               <div className="space-y-3">
                 <h4 className="text-sm font-semibold text-foreground">Kunde</h4>
-                <SignaturePad onSignatureChange={handleSignatureChange} signerName={ansprechpartner} />
+                <SignaturePad onSignatureChange={handleSignatureChange} />
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1">
                     <label className="text-xs text-muted-foreground">Ort</label>
@@ -330,7 +331,7 @@ const CustomerView = ({ data }: CustomerViewProps) => {
                 <h4 className="text-sm font-semibold text-foreground">medflex</h4>
                 <div className="rounded-lg border-2 border-dashed border-border bg-muted/30 p-6 flex flex-col items-center justify-center min-h-[120px]">
                   <span className="font-signature text-3xl text-foreground">{implementationManager}</span>
-                  <span className="text-xs text-muted-foreground mt-2">Implementation Manager</span>
+                  <span className="text-xs text-muted-foreground mt-2">Projektverantwortlicher medflex</span>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1">
