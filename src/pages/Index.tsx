@@ -239,15 +239,15 @@ const CustomerView = ({ data }: CustomerViewProps) => {
           {/* Editable fields for customer */}
           <div className="rounded-xl border border-border bg-card p-6 space-y-4 no-print">
             <h3 className="font-semibold text-foreground flex items-center gap-2">
-              <Info className="h-4 w-4 text-primary" /> Bitte ergänzen
+              <Info className="h-4 w-4 text-primary" /> Bitte ergänzen Sie Ihre Angaben
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-sm font-medium text-muted-foreground">Projektleiter (Kunde)</label>
-                <Input value={ansprechpartner} onChange={(e) => setAnsprechpartner(e.target.value)} placeholder="Ihr Name" />
+                <label className="text-sm font-medium text-muted-foreground">Ihr Name</label>
+                <Input value={ansprechpartner} onChange={(e) => setAnsprechpartner(e.target.value)} placeholder="Vor- und Nachname" />
               </div>
               <div className="space-y-1.5">
-                <label className="text-sm font-medium text-muted-foreground">Datum Produktivstart</label>
+                <label className="text-sm font-medium text-muted-foreground">Startdatum des Assistenten</label>
                 <Input type="date" value={liveDatum} onChange={(e) => setLiveDatum(e.target.value)} />
               </div>
               <div className="space-y-1.5">
@@ -259,10 +259,10 @@ const CustomerView = ({ data }: CustomerViewProps) => {
 
           {/* Section 1 */}
           <section className="space-y-3">
-            <h2 className="text-lg font-bold text-foreground">1. Gegenstand der Abnahme</h2>
+            <h2 className="text-lg font-bold text-foreground">1. Worum geht es?</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Gegenstand ist die technische Einrichtung und Konfiguration des medflex KI-Telefonassistenten 
-              (Phase 1) auf Grundlage des abgestimmten Fragebogens und der definierten Qualitätsstandards.
+              Ihr KI-Telefonassistent wurde nach Ihren Angaben eingerichtet und ist einsatzbereit. 
+              Mit diesem Protokoll bestätigen Sie, dass alles wie besprochen funktioniert.
             </p>
           </section>
 
@@ -270,21 +270,19 @@ const CustomerView = ({ data }: CustomerViewProps) => {
 
           {/* Section 2 - Timeline */}
           <section className="space-y-4">
-            <h2 className="text-lg font-bold text-foreground">2. Fristen und automatische Abnahme</h2>
+            <h2 className="text-lg font-bold text-foreground">2. Wie geht es weiter?</h2>
             <ProcessTimeline />
             <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
               <div className="flex gap-2 items-start rounded-lg bg-accent/10 border border-accent/20 p-4">
                 <AlertCircle className="h-4 w-4 text-accent mt-0.5 shrink-0" />
                  <p>
-                   <strong className="text-foreground">Automatische Abnahme:</strong> Die förmliche Abnahme gilt als erteilt, 
-                   wenn innerhalb von <strong>14 Tagen</strong> nach dem produktiven Start keine schriftliche Meldung 
-                   über wesentliche Mängel erfolgt.
-                 
+                   <strong className="text-foreground">Gut zu wissen:</strong> Wenn Sie innerhalb von <strong>14 Tagen</strong> nach 
+                   dem Start keine Probleme melden, gilt der Assistent als abgenommen.
                 </p>
               </div>
               <p>
-                 <strong className="text-foreground">Testphase:</strong> Während der aktiven Testphase werden notwendige 
-                 technische Anpassungen durch medflex vorgenommen. Diese sollten innerhalb von <strong>5 Werktagen</strong> umgesetzt sein, je nach Projektaufkommen.
+                 <strong className="text-foreground">Während der Testphase</strong> kümmern wir uns um nötige 
+                 Anpassungen – in der Regel innerhalb von <strong>5 Werktagen</strong>, je nach Aufkommen.
               </p>
             </div>
           </section>
@@ -293,11 +291,10 @@ const CustomerView = ({ data }: CustomerViewProps) => {
 
           {/* Section 3 - Change Management */}
           <section className="space-y-4">
-            <h2 className="text-lg font-bold text-foreground">3. Änderungsverfahren nach der Abnahme</h2>
+            <h2 className="text-lg font-bold text-foreground">3. Spätere Änderungen</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Nach erfolgter (oder automatischer) Abnahme geht das Projekt in den Regelbetrieb über. 
-              Änderungswünsche müssen in die Kapazitätsplanung des Kundenservice aufgenommen werden und können bis zu 
-              <strong> 15 Werktage</strong> in Anspruch nehmen.
+              Nach der Abnahme läuft Ihr Assistent im Regelbetrieb. Wenn Sie danach etwas ändern möchten, 
+              planen wir das gerne ein – bitte rechnen Sie mit bis zu <strong>15 Werktagen</strong> Bearbeitungszeit.
             </p>
             <PriorityMatrix />
           </section>
@@ -306,7 +303,7 @@ const CustomerView = ({ data }: CustomerViewProps) => {
 
           {/* Section 4 - Checklist */}
           <section className="space-y-4">
-            <h2 className="text-lg font-bold text-foreground">4. Abnahmekriterien</h2>
+            <h2 className="text-lg font-bold text-foreground">4. Bitte prüfen und bestätigen</h2>
             <div className="rounded-xl border border-border bg-card p-5 space-y-4">
               {checklistItems.map((item, i) => (
                 <div key={i} className="flex items-start gap-3">
