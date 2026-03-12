@@ -352,7 +352,7 @@ const CustomerView = ({ data }: CustomerViewProps) => {
                 <h4 className="text-sm font-semibold text-foreground">medflex</h4>
                 <div className="rounded-lg border-2 border-dashed border-border bg-muted/30 p-6 flex flex-col items-center justify-center min-h-[120px]">
                   <span className="font-signature text-3xl text-foreground">{implementationManager}</span>
-                  <span className="text-xs text-muted-foreground mt-2">Projektverantwortlicher medflex</span>
+                  <span className="text-xs text-muted-foreground mt-2">Ihr medflex-Ansprechpartner</span>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1">
