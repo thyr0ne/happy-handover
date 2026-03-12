@@ -392,7 +392,7 @@ const CustomerView = ({ data }: CustomerViewProps) => {
             }}
           >
             <FileCheck className="h-4 w-4" />
-            Automatische Abnahme Info
+            Was bedeutet automatische Abnahme?
           </Button>
         </div>
 
