@@ -14,10 +14,10 @@ import { generatePdf } from "@/lib/generatePdf";
 import medflexLogo from "@/assets/medflex-logo.png";
 
 const checklistItems = [
-  "Telefonassistent ist unter der definierten Nummer erreichbar.",
-  "Notfall-Erkennung und Weiterleitung funktionieren wie definiert.",
-  "Die Vorqualifizierung der Anliegen entspricht den Vorgaben.",
-  "Einführungsschulung (Multiplikatoren-Prinzip) wurde erfolgreich durchgeführt.",
+  "Der Telefonassistent ist unter der vereinbarten Nummer erreichbar.",
+  "Notfälle werden korrekt erkannt und weitergeleitet.",
+  "Die Anliegen der Anrufer werden richtig zugeordnet.",
+  "Eine Einweisung für Ihr Team hat stattgefunden.",
 ];
 
 // Encode/decode helpers using base64
