@@ -386,7 +386,7 @@ const CustomerView = ({ data }: CustomerViewProps) => {
             className="gap-2 flex-1"
             onClick={() => {
               toast.info(
-                "Die automatische Abnahme greift nach Ablauf der 14-Tage-Frist ohne schriftliche Mängelmeldung.",
+                "Wenn Sie innerhalb von 14 Tagen nach dem Start keine Probleme melden, gilt der Assistent automatisch als abgenommen.",
                 { duration: 6000 }
               );
             }}
