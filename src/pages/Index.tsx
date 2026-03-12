@@ -325,10 +325,9 @@ const CustomerView = ({ data }: CustomerViewProps) => {
 
           {/* Section 5 - Signatures */}
           <section className="space-y-5">
-            <h2 className="text-lg font-bold text-foreground">5. Unterschriften</h2>
+            <h2 className="text-lg font-bold text-foreground">5. Unterschrift</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Durch die Unterschrift (oder den Ablauf der 2-Wochen-Frist) bestätigt der Kunde die 
-              Funktionsfähigkeit der Lösung gemäß der Leistungsbeschreibung.
+              Mit Ihrer Unterschrift bestätigen Sie, dass der Telefonassistent wie vereinbart funktioniert.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
