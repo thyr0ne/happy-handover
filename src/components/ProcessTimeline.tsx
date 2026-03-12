@@ -1,32 +1,32 @@
-import { Clock, CheckCircle2, Settings, AlertTriangle } from "lucide-react";
+import { Clock, CheckCircle2, Settings, FileEdit } from "lucide-react";
 
 const steps = [
   {
     icon: Settings,
     label: "Testphase",
     duration: "ca. 5 Werktage",
-    description: "Je nach Projektaufkommen",
+    description: "Wir prüfen & optimieren",
     colorClass: "text-info bg-secondary",
   },
   {
     icon: Clock,
-    label: "Automatische Abnahme",
+    label: "Abnahme",
     duration: "14 Tage",
-    description: "Frist nach Produktivstart",
+    description: "Ihre Prüffrist",
     colorClass: "text-accent bg-secondary",
   },
   {
     icon: CheckCircle2,
-    label: "Regelbetrieb",
+    label: "Betrieb",
     duration: "—",
-    description: "Projekt abgeschlossen",
+    description: "Alles läuft",
     colorClass: "text-success bg-secondary",
   },
   {
-    icon: AlertTriangle,
-    label: "Änderungswünsche",
-    duration: "15 Werktage",
-    description: "Planungsfrist",
+    icon: FileEdit,
+    label: "Änderungen",
+    duration: "bis 15 Werktage",
+    description: "Auf Anfrage",
     colorClass: "text-warning bg-secondary",
   },
 ];

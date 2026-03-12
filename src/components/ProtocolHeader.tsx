@@ -19,24 +19,23 @@ const ProtocolHeader = ({ kundenName, fachbereich, ansprechpartner, implementati
           </div>
           <div>
             <h1 className="text-2xl font-bold">Abnahmeprotokoll</h1>
-            <p className="text-primary-foreground/80 text-sm">medflex Automatisierungslösungen</p>
+            <p className="text-primary-foreground/80 text-sm">Ihr KI-Telefonassistent von medflex</p>
           </div>
         </div>
         <p className="text-sm text-primary-foreground/70 max-w-2xl">
-          Dieses Abnahmeprotokoll dient als strukturierte Grundlage für den formalen Projektabschluss 
-          der Implementierungsphase und stellt sicher, dass sowohl die Erwartungen des Kunden als auch 
-          die Kapazitätsplanung im Customer Service (CS) von medflex berücksichtigt werden.
+          Mit diesem Dokument bestätigen Sie, dass Ihr Telefonassistent wie gewünscht eingerichtet wurde 
+          und einsatzbereit ist.
         </p>
       </div>
 
       {/* Meta Info */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {[
-          { label: "Kunde / Einrichtung", value: kundenName },
+          { label: "Praxis / Einrichtung", value: kundenName },
           ...(fachbereich ? [{ label: "Fachbereich / Standort", value: fachbereich }] : []),
-          { label: "Projektleiter (Kunde)", value: ansprechpartner },
-          { label: "Projektverantwortlicher (medflex)", value: implementationManager },
-          { label: "Datum Produktivstart", value: liveDatum },
+          { label: "Ansprechpartner", value: ansprechpartner },
+          { label: "Ihr medflex-Ansprechpartner", value: implementationManager },
+          { label: "Start des Telefonassistenten", value: liveDatum },
         ].map((item, i) => (
           <div key={i} className="rounded-xl border border-border bg-card p-4">
             <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{item.label}</span>
